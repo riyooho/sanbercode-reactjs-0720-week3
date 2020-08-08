@@ -8,27 +8,16 @@ const TabelBuahForm = () =>{
     const [statusForm, setStatusForm] = useContext(TabelBuahContext)
     const [selectId, setSelectedId] = useContext(TabelBuahContext)
 
-const handleDelete = (event) => {
-    let id = Number(event.target.value)
-    let newDataBuah = dataHargaBuah.filter(el => el.id !== id)
 
-    axios.delete(`http://backendexample.sanbercloud.com/api/fruits/${id}`)
-        .then(res => {
-            console.log(res)
-        })
-    setDataHargaBuah([...newDataBuah])
-}
-
-const handleEdit = (event) => {
-    let id = Number(event.target.value)
-    console.log(dataHargaBuah)
-    let buah = dataHargaBuah.find(x => x.id === id)
-    setInput({name: buah.name, price: buah.price, weight: buah.weight})
-    setSelectedId(id)
+  const handleEdit = (event) =>{
+    let idDataBuah = parseInt(event.target.value)
+    let dataBuah = dataHargaBuah.find(x=> x.id === idDataBuah)
+    setInput({name: dataBuah.name, price: dataBuah.price, weight: dataBuah.weight})
+    setSelectedId(idDataBuah)
     setStatusForm("edit")
-}
+  }
 
-const handleChange = (event) => {
+  const handleChange = (event) =>{
     let typeOfInput = event.target.name
 
     switch (typeOfInput){
@@ -50,40 +39,46 @@ const handleChange = (event) => {
     default:
       {break;}
     }
-}
+  }
 
-
-const handleSubmit = (event) => {
+  const handleSubmit = (event) =>{
+    // menahan submit
     event.preventDefault()
-    if(input['name'].replace(/\s/g, '') !== "" && input['price'].toString().replace(/\s/g, '') !== "" && input['weight'].toString().replace(/\s/g, '') !== "" ){
-        if(statusForm === "create"){
-            axios.post(`http://backendexample.sanbercloud.com/api/fruits`, input)
-                .then(res => {
-                    console.log(res.data)
-                    setDataHargaBuah([...dataHargaBuah, {name: res.data.name, price: res.data.price, weight: res.data.weight}])
-                })
 
+    let name = input.name
+    let price = input.price.toString()
+    
 
-        }else if(statusForm === "edit"){
-            axios.put(`http://backendexample.sanbercloud.com/api/fruits/${selectId}`, input)
-                .then(res => {
-                    let buah = dataHargaBuah.find(el => el.id === selectId)
-                    buah['name'] = input.name
-                    buah['price'] = input.price
-                    buah['weight'] = input.weight
-                    setDataHargaBuah([...dataHargaBuah])
-                })
-        }
-
-        setStatusForm("create")
-        setSelectedId(0)
-        setInput({
-            name: "",
-            price: "",
-            weight: ""
+    if (name.replace(/\s/g,'') !== "" && price.replace(/\s/g,'') !== ""){      
+      if (statusForm === "create"){        
+        axios.post(`http://backendexample.sanbercloud.com/api/fruits`, {name: input.name, price: input.price, weight: input.weight})
+        .then(res => {
+            setDataHargaBuah([
+              ...dataHargaBuah, 
+              { id: res.data.id, 
+                name: input.name, 
+                price: input.price,
+                weight: input.weight
+              }])
         })
+      }else if(statusForm === "edit"){
+        axios.put(`http://backendexample.sanbercloud.com/api/fruits/${selectId}`, {name: input.name, price: input.price, weight: input.weight})
+        .then(() => {
+            let dataBuah = dataHargaBuah.find(el=> el.id === selectId)
+            dataBuah.name = input.name
+            dataBuah.price = input.price
+            dataBuah.weight = input.weight
+            setDataHargaBuah([...dataHargaBuah])
+        })
+      }
+      
+      setStatusForm("create")
+      setSelectedId(0)
+      setInput({name: "", price: "", weight: 0})
     }
-}
+
+  }
+
 
 return(
         <>

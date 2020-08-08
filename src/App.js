@@ -7,6 +7,9 @@ import Lists from './tugas13/Lists.js';
 import Listx from './tugas14/Listx.js';
 import TabelBuahx from './tugas15/TabelBuah.js';
 import Routes from './tugas15/Routes.js'
+// import ThemeContextProvider from './tugas15/ThemeContext';
+// import Navbar from './tugas15/Navbar.js';
+// import MainBody from './tugas15/MainBody.js';
 
 function App() {
   return (

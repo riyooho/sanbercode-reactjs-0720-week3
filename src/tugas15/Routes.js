@@ -52,7 +52,7 @@ const Routes = () => {
           <Route path="/tabelbuahx">
             <TabelBuahx/>
           </Route>
-          <Route exact path="/">
+          <Route path="/">
             <TabelBuah/>
           </Route>
         </Switch>

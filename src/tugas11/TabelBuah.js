@@ -30,6 +30,7 @@ class TabelBuah extends React.Component {
   render() {
     return (
       <>
+      <h1 align="center">Daftar Harga Buah</h1>
       	<table style={{border: "1px solid #000", width: "100%"}}>
           	<tr style={{backgroundColor: "#ccc", padding: "10px"}}>
           		<th>Nama</th>

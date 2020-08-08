@@ -2,6 +2,7 @@ import React from "react"
 import {TabelBuahProvider} from "./TabelBuahContext"
 import TabelBuahList from "./TabelBuahList"
 import TabelBuahForm from "./TabelBuahForm"
+import {ThemeProvider} from "./ThemeContext"
 
 const TabelBuahx = () =>{
   return(
