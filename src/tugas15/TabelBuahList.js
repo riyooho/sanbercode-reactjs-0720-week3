@@ -17,25 +17,25 @@ const TabelBuahList = () =>{
         }
     })
 
-    // const handleDelete = (event) => {
-    //     let id = Number(event.target.value)
-    //     let newDataBuah = dataHargaBuah.filter(el => el.id !== id)
+    const handleDelete = (event) => {
+        let id = Number(event.target.value)
+        let newDataBuah = dataHargaBuah.filter(el => el.id !== id)
     
-    //     axios.delete(`http://backendexample.sanbercloud.com/api/fruits/${id}`)
-    //         .then(res => {
-    //             console.log(res)
-    //         })
-    //     setDataHargaBuah([...newDataBuah])
-    // }
+        axios.delete(`http://backendexample.sanbercloud.com/api/fruits/${id}`)
+            .then(res => {
+                console.log(res)
+            })
+        setDataHargaBuah([...newDataBuah])
+    }
     
-    // const handleEdit = (event) => {
-    //     let id = Number(event.target.value)
-    //     console.log(dataHargaBuah)
-    //     let buah = dataHargaBuah.find(x => x.id === id)
-    //     setInput({name: buah.name, price: buah.price, weight: buah.weight})
-    //     setSelectedId(id)
-    //     setStatusForm("edit")
-    // }
+    const handleEdit = (event) => {
+        let id = Number(event.target.value)
+        console.log(dataHargaBuah)
+        let buah = dataHargaBuah.find(x => x.id === id)
+        setInput({name: buah.name, price: buah.price, weight: buah.weight})
+        setSelectedId(id)
+        setStatusForm("edit")
+    }
 
 
 
@@ -59,8 +59,8 @@ const TabelBuahList = () =>{
                 <td>{val.price}</td>
                 <td>{val.weight/1000} kg</td>
                 <td>
-                {/* <button onClick={handleEdit} value={val.id}>Ubah</button>
-                <button onClick={handleDelete} value={val.id}>Hapus</button> */}
+                <button onClick={handleEdit} value={val.id}>Ubah</button>
+                <button onClick={handleDelete} value={val.id}>Hapus</button>
                 </td>
             </tr>
                 )
